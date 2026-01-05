@@ -1,0 +1,73 @@
+faculty = {}
+
+def add_faculty():
+    fid = input("Enter Faculty ID: ")
+    if fid in faculty:
+        print("Faculty already exists ")
+        return
+    name = input("Enter Name: ")
+    department = input("Enter Department: ")
+    courses = input("Enter Courses (comma separated): ").split(",")
+    faculty[fid] = {
+        "Name": name,
+        "Department": department,
+        "Courses": [c.strip() for c in courses]
+    }
+    print("Faculty added successfully ")
+
+def view_faculty():
+    if not faculty:
+        print("No faculty records ")
+        return
+    for fid, details in faculty.items():
+        print(f"\nID: {fid}")
+        print(f"Name: {details['Name']}")
+        print(f"Department: {details['Department']}")
+        print(f"Courses: {', '.join(details['Courses'])}")
+
+def update_faculty():
+    fid = input("Enter Faculty ID to update: ")
+    if fid not in faculty:
+        print("Faculty not found ")
+        return
+    name = input("Enter new name: ")
+    department = input("Enter new department: ")
+    courses = input("Enter new courses (comma separated): ").split(",")
+    faculty[fid] = {
+        "Name": name,
+        "Department": department,
+        "Courses": [c.strip() for c in courses]
+    }
+    print("Faculty updated successfully ")
+
+def delete_faculty():
+    fid = input("Enter Faculty ID to delete: ")
+    if fid in faculty:
+        del faculty[fid]
+        print("Faculty deleted successfully ")
+    else:
+        print("Faculty not found ")
+
+while True:
+    print("\n--- Faculty Information System ---")
+    print("1. Add Faculty")
+    print("2. View Faculty")
+    print("3. Update Faculty")
+    print("4. Delete Faculty")
+    print("5. Exit")
+
+    choice = input("Enter your choice: ")
+
+    if choice == "1":
+        add_faculty()
+    elif choice == "2":
+        view_faculty()
+    elif choice == "3":
+        update_faculty()
+    elif choice == "4":
+        delete_faculty()
+    elif choice == "5":
+        print("Exiting program ")
+        break
+    else:
+        print("Invalid choice ")
